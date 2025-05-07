@@ -16,6 +16,7 @@ export { default as Jumbotron } from "./text/Jumbotron";
 
 // Cards
 export { default as VerticalIconTextCard } from "./cards/VerticalIconTextCard";
+export { default as ExchangeRate } from "./cards/ExchangeRate";
 
 // Sections
 export { default as ContactForm } from "./sections/ContactForm";
