@@ -1,5 +1,5 @@
 {
-  "name": "xrp_aggregator",
+  "name": "xrp-aggregator",
   "version": "0.1.0",
   "private": true,
   "scripts": {
