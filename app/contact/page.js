@@ -17,7 +17,7 @@ export default function Contact() {
       {/* Jumbotron */}
       <Jumbotron page="Contact" desc="Contact Support" />
 
-      <section className="container -mt-5">
+      <section className="container -mt-10">
         <div className="relative space-y-6 lg:space-y-10 max-w-text mx-auto">
           <div className="space-y-5">
             <Heading

@@ -89,9 +89,53 @@ const faq_data = [
   },
 ];
 
+const terms_of_use_data = [
+  {
+    heading: "Introduction",
+    content: [
+      {
+        title: "Welcome to Ripple XRP Aggregator",
+        content:
+          "Thank you for choosing Ripple XRP Aggregator. We are committed to providing you with the best possible service. By using our services, you agree to the following terms and conditions (“Terms”). Please read them carefully.",
+      },
+    ],
+  },
+  {
+    heading: "Eligibility",
+    content: [
+      {
+        title: "Eligibility",
+        content:
+          "You must be at least 18 years old to use Ripple XRP Aggregator. By using Ripple XRP Aggregator, you represent and warrant that you are of legal age to form a binding contract. If you are under 18 years old, you may only use Ripple XRP Aggregator with the consent of a parent or legal guardian.",
+      },
+    ],
+  },
+  {
+    heading: "Privacy Policy",
+    content: [
+      {
+        title: "Privacy Policy",
+        content:
+          "Ripple XRP Aggregator is committed to protecting your privacy. We do not collect any personal information from you except for the information you provide to us through the Ripple XRP Aggregator website. We use third-party services to provide our services, and these third-party services may collect personal information. We do not control the privacy policies of these third-party services, and we encourage you to review their privacy policies before providing personal information to them.",
+      },
+    ],
+  },
+  {
+    heading: "Disclaimer of Warranties",
+    content: [
+      {
+        title: "Disclaimer of Warranties",
+        content:
+          "Ripple XRP Aggregator is provided “as is” and “as available” without any warranty of any kind, either express or implied. Ripple XRP Aggregator disclaims all implied warranties, including, without limitation, any warranty of merchantability, fitness for a particular purpose, or non-infringement. Ripple XRP Aggregator does not warrant that the functions contained in Ripple XRP Aggregator will be error-free, that defects will be corrected, or that Ripple XRP Aggregator will be free of viruses or other harmful components. Ripple XRP Aggregator does not warrant that any information or content provided by Ripple XRP Aggregator will be accurate, complete, or up-to-date. Ripple XRP Aggregator does not warrant that any errors or omissions in Ripple XRP Aggregator will be corrected. Ripple XRP Aggregator is not responsible for any damages or losses caused",
+      },
+    ],
+  },
+];
+
 export default {
   menu_links,
   about_us,
   contact_data,
   faq_data,
+  terms_of_use_data,
 };
