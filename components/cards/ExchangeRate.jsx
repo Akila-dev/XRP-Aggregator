@@ -16,6 +16,8 @@ function ExchangeRate() {
         {
           "symbols": [
             [
+              "BINANCE:XRPUSD|1D"
+            ],[
               "BINANCE:XRPUSDT|1D"
             ]
           ],
@@ -38,7 +40,7 @@ function ExchangeRate() {
           "valuesTracking": "1",
           "changeMode": "price-and-percent",
           "chartType": "area",
-          "maLineColor": "#2962FF",
+          "maLineColor": "#39ff14",
           "maLineWidth": 1,
           "maLength": 9,
           "headerFontSize": "medium",
@@ -65,7 +67,6 @@ function ExchangeRate() {
     <div className="h-90 md:h-105 w-full p-3 lg:p-6 rounded-lg lg:rounded-3xl bg-lines-2">
       <div className="tradingview-widget-container" ref={container}>
         <div className="tradingview-widget-container__widget"></div>
-        {/* <div className="tradingview-widget-copyright"></div> */}
       </div>
     </div>
   );
