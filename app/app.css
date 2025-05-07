@@ -1,0 +1,262 @@
+/* ! COLORS AND GRADIENTS */
+.text-gradient,
+h1 span,
+h2 span,
+.icon_card-icon,
+.white-text-gradient,
+h1,
+h2,
+h3,
+h3 span,
+h4,
+h4 span,
+.inner-html b,
+.inner-html strong,
+.inner-html i,
+.inner-html span {
+  background: var(--to);
+  background: linear-gradient(-90deg, var(--from) 0%, var(--to) 100%);
+  background: -webkit-linear-gradient(-90deg, var(--from) 0%, var(--to) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient,
+h1 span,
+h2 span,
+h3 span,
+h4 span,
+.icon_card-icon,
+.inner-html b,
+.inner-html strong,
+.inner-html i,
+.inner-html span {
+  --from: var(--neon-from);
+  --to: var(--neon-to);
+}
+
+.white-text-gradient,
+h1,
+h2,
+h3,
+h4 {
+  --from: white;
+  --to: var(--fg);
+}
+
+.neon-gradient,
+.card-gradient,
+.dark-gradient,
+.dark-gradient-2,
+.link-card,
+.light-gradient,
+.tag {
+  background: var(--to);
+  background: linear-gradient(-90deg, var(--from) 0%, var(--to) 100%);
+  background: -webkit-linear-gradient(-90deg, var(--from) 0%, var(--to) 100%);
+}
+
+.neon-gradient,
+.tag {
+  --from: var(--neon-from);
+  --to: var(--neon-to);
+}
+
+.card-gradient {
+  --from: var(--dark);
+  --to: var(--card);
+}
+
+.dark-gradient,
+.link-card {
+  --from: var(--dark);
+  --to: var(--bg);
+  /* @apply backdrop-filter backdrop-blur-lg; */
+}
+
+.dark-gradient-2,
+.link-card:hover {
+  --from: var(--bg);
+  --to: var(--dark);
+  /* @apply backdrop-filter backdrop-blur-lg; */
+}
+
+.light-gradient {
+  --from: var(--fg);
+  --to: var(--light);
+  /* @apply backdrop-filter backdrop-blur-lg; */
+}
+
+.radial-dark-overlay {
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 20%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+}
+
+.gradient-border {
+  --dis: -1px;
+  --inc: 2px;
+  position: relative;
+  z-index: 0;
+}
+
+.gradient-border::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: inherit;
+
+  z-index: -1;
+}
+
+.gradient-border::before {
+  content: "";
+
+  position: absolute;
+  left: var(--dis);
+  top: var(--dis);
+  right: var(--dis);
+  bottom: var(--dis);
+  width: calc(100% + var(--inc));
+  height: calc(100% + var(--inc));
+  border-radius: inherit;
+
+  background: var(--neon-to);
+  background: linear-gradient(-90deg, var(--neon-from) 0%, var(--neon-to) 100%);
+  background: -webkit-linear-gradient(
+    -90deg,
+    var(--neon-from) 0%,
+    var(--neon-to) 100%
+  );
+
+  z-index: -1;
+}
+
+/* !NOISE */
+.noise-static {
+  position: relative;
+}
+.noise-static:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: url("https://assets.codepen.io/16327/noise.png");
+  background-attachment: fixed;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.noise {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+@supports (-webkit-hyphens: none) {
+  .noise {
+    display: none;
+  }
+}
+
+.noise:before {
+  content: "";
+  position: absolute;
+  animation: noise 1.2s steps(3) both infinite;
+  will-change: auto;
+  background-image: url(/images/noise.png);
+  background-size: 100px;
+  width: 200%;
+  height: 200%;
+  left: -50%;
+  top: -50%;
+  opacity: 0.3;
+}
+
+@keyframes noise {
+  0% {
+    transform: translate3d(1%, -1%, 0);
+  }
+
+  10% {
+    transform: translate3d(-5%, -2%, 0);
+  }
+
+  20% {
+    transform: translate3d(10%, 5%, 0);
+  }
+
+  30% {
+    transform: translate3d(5%, -11%, 0);
+  }
+
+  40% {
+    transform: translate3d(-12%, -5%, 0);
+  }
+
+  50% {
+    transform: translate3d(10%, 9%, 0);
+  }
+
+  60% {
+    transform: translate3d(15%, 0, 0);
+  }
+
+  70% {
+    transform: translate3d(-10%, 8%, 0);
+  }
+
+  80% {
+    transform: translate3d(10%, 2%, 0);
+  }
+
+  90% {
+    transform: translate3d(1%, 5%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 8%, 0);
+  }
+}
+
+.noise,
+.noise:before,
+.noise:after {
+  box-sizing: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* * TEXT */
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  font-kerning: none;
+}
+
+.char,
+.word,
+.line,
+.inherit {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}

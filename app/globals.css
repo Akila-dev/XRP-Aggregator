@@ -1,0 +1,312 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&family=Space+Grotesk:wght@300..700&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss";
+
+/* @font-face {
+  font-family: Akira;
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+  src: url("/fonts/akira-expanded.otf") format("opentype");
+} */
+
+:root {
+  --neon: #39ff14;
+
+  --neon-from: #adff2f;
+  --neon-via: #39ff14;
+  --neon-to: #00ff00;
+
+  --dark: #1a1a1a;
+  --light: #575757;
+  --card: #343434;
+  --bg: #000000;
+  --fg: #dedede;
+
+  --timeline-dis: -6.5em;
+}
+
+@theme {
+  --color-neon: #39ff14;
+  --color-neon-from: #adff2f;
+  --color-neon-via: #39ff14;
+  --color-neon-to: #00ff00;
+  --color-dark: #1a1a1a;
+  --color-light: #575757;
+  --color-card: #343434;
+  --color-bg: #000000;
+  --color-fg: #dedede;
+
+  --font-base: "Urbanist", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+
+  --breakpoint-xs: 360px;
+}
+
+/* Example global styles */
+html,
+body {
+  @apply font-base bg-bg text-fg overflow-x-hidden;
+}
+
+.radial-gradient {
+  background: radial-gradient(circle at 50% 50%, #0f0f0f 0%, #000 100%);
+}
+
+* {
+  @apply leading-[150%];
+}
+
+h1,
+h2 {
+  @apply font-display text-white;
+}
+
+h1,
+h2,
+h3,
+.h3 {
+  @apply font-semibold;
+}
+
+h1,
+.h1 {
+  @apply text-[14.5vw] sm:text-[7.5vw] md:text-[7vw] lg:text-[5.5vw] leading-[100%];
+}
+
+h2,
+.h2 {
+  @apply text-[9vw] sm:text-[6vw] md:text-[5.5vw] lg:text-[3.75vw] leading-[120%];
+}
+
+h3,
+.h3 {
+  @apply text-[6vw] sm:text-[3.5vw] md:text-[3vw] lg:text-[2vw];
+}
+
+h4 {
+  @apply text-[5vw] sm:text-[3vw] md:text-[2.5vw] lg:text-[1.5vw] font-semibold;
+}
+
+.card-title {
+  @apply text-[6vw] sm:text-[3.5vw] md:text-[3vw] lg:text-[1.8vw] font-semibold;
+}
+
+.icon-text {
+  @apply text-[5vw] sm:text-[2.5vw] md:text-[2.25vw] lg:text-[1.5vw];
+}
+
+.icon-box-icon {
+  @apply text-[12.5vw] sm:text-[7vw] md:text-[6vw] lg:text-[3.75vw] leading-[100%];
+}
+
+p,
+a,
+button,
+input,
+.p,
+div,
+label,
+textarea {
+  @apply font-base text-[4.5vw] xs:text-sm md:text-[1.8vw] lg:text-[1.2vw] leading-[150%] font-medium text-fg;
+}
+
+.mobile-nav-link {
+  @apply text-[7vw] sm:text-[5vw] md:text-[4vw] lg:text-[2vw] font-display;
+}
+
+.sm {
+  @apply text-[3vw] md:text-[1.4vw] lg:text-[0.7vw] leading-[150%];
+}
+
+.tag {
+  /* E.g Team Members tag */
+  @apply text-[3vw] md:text-[1.6vw] lg:text-[0.85vw] leading-[150%] text-bg font-semibold rounded uppercase py-[0.3em] px-2;
+}
+
+.container-x,
+.container {
+  @apply px-[1.5em] md:px-[4em] lg:px-[6em] !max-w-full overflow-hidden;
+}
+
+.container-y,
+.container {
+  @apply py-[5em] lg:py-[7em];
+}
+
+.jumbotron {
+  @apply h-30 w-full block;
+}
+
+.clip-top {
+  clip-path: polygon(0% 0%, 100% calc(0% + 2em), 100% 100%, 0% 100%);
+  @apply !pt-12;
+}
+
+.flex-center {
+  @apply flex justify-center items-center gap-4;
+}
+
+.flex-v-center {
+  @apply flex items-center gap-4;
+}
+
+.flex-v-center-md {
+  @apply flex flex-col md:flex-row md:items-center gap-5 md:gap-7 lg:gap-10;
+}
+
+.flex-v-center-lg {
+  @apply flex flex-col lg:flex-row lg:items-center gap-5 md:gap-7 lg:gap-10;
+}
+
+.flex-between {
+  @apply flex justify-between items-center gap-4;
+}
+
+.max-w-text {
+  @apply md:max-w-[70vw] lg:max-w-[60vw];
+}
+
+.max-w-text-2 {
+  @apply md:max-w-[60vw] lg:max-w-[50vw];
+}
+
+.grid-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-7 lg:gap-[7em];
+}
+
+.grid-2-v2 {
+  @apply grid grid-cols-1 md:grid-cols-7 gap-5 md:gap-8 lg:gap-10;
+}
+
+.grid-3 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 w-full items-stretch;
+}
+
+.show-md {
+  @apply hidden md:flex;
+}
+
+.show-lg {
+  @apply hidden lg:flex;
+}
+
+.show-xl {
+  @apply hidden xl:flex;
+}
+
+.hide-md {
+  @apply md:hidden;
+}
+
+.hide-lg {
+  @apply lg:hidden;
+}
+
+.hide-xl {
+  @apply xl:hidden;
+}
+
+.transform-700 {
+  @apply transition duration-700;
+}
+
+.btn-1,
+.btn-2 {
+  @apply py-2 px-5 border font-medium rounded-lg uppercase;
+}
+
+.btn-1 {
+  @apply text-neon border-neon;
+}
+
+.btn-2 {
+  @apply text-black font-semibold border-neon;
+}
+
+.clip-bg {
+  @apply absolute translate-y-[-50%] translate-x-[-50%] top-[200px] left-[50%] w-[400px] h-[400px] rounded-full scale-0;
+}
+
+.footer-group {
+  @apply flex flex-col gap-2;
+}
+
+.footer-group h3,
+.footer-group h4 {
+  @apply pb-[0.25em] uppercase text-neon;
+}
+
+.footer-link {
+  @apply text-white hover:text-neon uppercase;
+}
+
+/* ! FORM */
+.input-block {
+  @apply flex flex-col gap-2;
+}
+
+label {
+  @apply text-[--black] font-medium;
+}
+
+input,
+.input,
+textarea {
+  @apply bg-card py-[0.85em] px-4 rounded-lg outline-none border-none focus:ring-[0.1em] focus:ring-neon/50 backdrop-blur-md;
+}
+
+input::placeholder,
+textarea::placeholder {
+  @apply text-fg/50;
+}
+
+input,
+.input {
+  @apply w-full;
+}
+
+textarea {
+  @apply w-full min-h-[8em] resize-none;
+}
+
+.input-icon {
+  @apply !text-white flex items-center justify-center size-5;
+}
+
+.text-error {
+  @apply text-red-500;
+}
+
+.border-success {
+  @apply border-neon;
+}
+
+/* textarea:-webkit-autofill {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: var(--black) !important;
+} */
+
+.hover-scale {
+  @apply transform-gpu hover:scale-105 duration-500 transition;
+}
+
+/* ! TIMELINES */
+.timeline-dot {
+  @apply rounded-full w-2 h-2 bg-neon;
+}
+
+.timeline-line-pos {
+  @apply absolute left-0 md:left-1/2 top-0 -translate-x-1/2;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --timeline-dis: -4.5em;
+  }
+}
+@media (max-width: 768px) {
+  :root {
+    --timeline-dis: -2.05em;
+  }
+}
