@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       <body>
         <Navbar />
         <div className="noise" />
-        <div className="min-h-screen">{children}</div>
+        <div className="min-h-screen body">{children}</div>
         <Footer />
       </body>
     </html>

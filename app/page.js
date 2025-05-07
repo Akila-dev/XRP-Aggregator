@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <Hero />
       <AboutRipple />
-      <div id="faq" className="container bg-bg space-y-5 lg:space-y-10">
+      <div id="faq" className="container space-y-5 lg:space-y-10">
         <Heading tag="FAQ" title="Frequency Asked Questions" />
         <Accordion data={data.faq_data} />
       </div>

@@ -2,7 +2,7 @@ import { CardDiv, Heading, CoinCanvas } from "@/components";
 
 const AboutRipple = () => {
   return (
-    <div className="container flex-v-center-md lg:!gap-10 radial-gradient border-y border-dark">
+    <div className="container flex-v-center-md lg:!gap-10 border-y border-dark bg-lines">
       <div className="size-[90vw] md:size-80 md:min-w-80 lg:size-100 lg:min-w-100 lg:min-h-100">
         <CoinCanvas />
       </div>
