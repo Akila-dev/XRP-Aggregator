@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 
-import { Button, TextDiv, HeroCanvas } from ".";
+import { Button, TextDiv, HeroCanvas, Partners } from ".";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -14,7 +14,7 @@ export default function Hero() {
 
   return (
     <div
-      className="relative w-full h-screen text-center overflow-hidden bg-cover bg-center"
+      className="relative w-full min-h-screen lg:h-screen text-center overflow-hidden bg-cover bg-center"
       // style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
     >
       <HeroCanvas />
@@ -22,7 +22,7 @@ export default function Hero() {
         className="absolute top-0 left-0 w-full h-[65%] object-cover bg-bottom bg-opacity-50"
         style={{ backgroundImage: "url('/images/bg-lines.png')" }}
       /> */}
-      <div className="w-full h-full flex-center">
+      <div className="w-full h-full flex-center pt-20 pb-34">
         <TextDiv
           ref={container}
           className="gsap-hero-container container-x max-w-full md:max-w-[90vw] lg:max-w-[65vw] relative flex-center flex-col !gap-3 pt-16 xs:pt-10"
@@ -42,6 +42,9 @@ export default function Hero() {
             className="btn-2 !gap-2"
           />
         </TextDiv>
+      </div>
+      <div className="absolute bottom-0 left-0 w-full pb-7 xl:pb-8">
+        <Partners />
       </div>
     </div>
   );

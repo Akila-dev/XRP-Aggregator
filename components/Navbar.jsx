@@ -44,7 +44,11 @@ const Navbar = () => {
           ))}
         </ul>
         <div className="flex-v-center">
-          <Button href="/contact" text="Contact Us" className="btn-2 show-md" />
+          <Button
+            href="/#exchanges"
+            text="Exchanges"
+            className="btn-2 show-md"
+          />
           <div className="hide-lg">
             <MenuButton />
           </div>

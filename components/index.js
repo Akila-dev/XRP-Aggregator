@@ -17,6 +17,7 @@ export { default as Jumbotron } from "./text/Jumbotron";
 // Cards
 export { default as VerticalIconTextCard } from "./cards/VerticalIconTextCard";
 export { default as ExchangeRate } from "./cards/ExchangeRate";
+export { default as ExchangesTable } from "./cards/ExchangesTable";
 
 // Sections
 export { default as ContactForm } from "./sections/ContactForm";
@@ -25,6 +26,8 @@ export { default as Documentation } from "./sections/Documentation";
 export { default as SocialIcons } from "./sections/SocialIcons";
 export { default as AboutRipple } from "./sections/AboutRipple";
 export { default as Accordion } from "./sections/Accordion";
+export { default as Partners } from "./sections/Partners";
+export { default as Exchanges } from "./sections/Exchanges";
 
 // Icons
 export { default as NeonGradientIcon } from "./icons/NeonGradientIcon";

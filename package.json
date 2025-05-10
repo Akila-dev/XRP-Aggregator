@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^5.0.1",
     "@react-three/drei": "^10.0.4",
     "@react-three/fiber": "^9.1.0",
+    "axios": "^1.9.0",
     "framer-motion": "^12.10.0",
     "gsap": "^3.13.0",
     "lightningcss": "^1.29.3",

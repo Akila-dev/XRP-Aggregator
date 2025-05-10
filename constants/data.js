@@ -17,10 +17,10 @@ const menu_links = [
     label: "Terms of Use",
     url: "/terms-of-use",
   },
-  {
-    label: "Contact",
-    url: "/contact",
-  },
+  // {
+  //   label: "Contact",
+  //   url: "/contact",
+  // },
 ];
 
 const about_us = [
@@ -132,10 +132,24 @@ const terms_of_use_data = [
   },
 ];
 
+const partners_list = [
+  icons.partner1,
+  icons.partner2,
+  icons.partner3,
+  icons.partner4,
+  icons.partner5,
+  icons.partner6,
+  icons.partner7,
+  icons.partner8,
+  icons.partner9,
+  icons.partner10,
+];
+
 export default {
   menu_links,
   about_us,
   contact_data,
   faq_data,
   terms_of_use_data,
+  partners_list,
 };

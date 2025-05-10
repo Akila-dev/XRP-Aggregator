@@ -242,6 +242,25 @@ h4 {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* * MARQUEE */
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: scrollMarquee 30s linear infinite;
+  will-change: transform;
+}
+
+.overflow-hidden:hover .marquee {
+  animation: scrollMarquee 30s linear infinite; /* slower on hover */
+}
+
 /* * TEXT */
 h1,
 h2,

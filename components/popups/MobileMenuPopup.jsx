@@ -36,7 +36,8 @@ const MobileMenuPopup = ({ close }) => {
           ))}
         </ul>
         <div className="flex flex-col gap-3">
-          <Button href="/contact" text="Contact Us" className="btn-2" />
+          <Button href="/#exchanges" text="Exchanges" className="btn-2" />
+
           <Link
             href={`mailto:${data.contact_data.email}`}
             className="text-gradient hover-scale"

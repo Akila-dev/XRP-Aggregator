@@ -14,7 +14,7 @@ const Footer = () => {
     <div className="flex flex-col container !py-15 bg-lines !space-y-10">
       <div className="!space-y-6">
         {/* Logo and Navs */}
-        <div className="flex-between !block lg:!flex">
+        <div className="flex-between !block lg:!flex !pb-6 !border-b !border-card">
           <Logo />
           <ul className="flex-v-center !flex-wrap !gap-y-2 pt-5 lg:pt-0">
             <li>
@@ -42,13 +42,13 @@ const Footer = () => {
           </ul>
         </div>
         {/* Disclaimer/Legalties */}
-        <p className="!pt-6 !border-t !border-card !text-white/40">
+        {/* <p className="!pt-6 !border-t !border-card !text-white/40">
           You must be at least 18 years old to use Ripple XRP Aggregator. By
           using Ripple XRP Aggregator, you represent and warrant that you are of
           legal age to form a binding contract. If you are under 18 years old,
           you may only use Ripple XRP Aggregator with the consent of a parent or
           legal guardian.
-        </p>
+        </p> */}
         {/* Link and Copyright */}
         <div className="flex flex-col md:flex-row justify-between gap-3">
           <p className="text-[#7A7A7B] text-[12px] text-center">

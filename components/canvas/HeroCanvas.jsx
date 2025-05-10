@@ -21,7 +21,7 @@ const Stars = (props) => {
 
   useEffect(() => {
     setSphere(() => random.inSphere(new Float32Array(900), { radius: 2 }));
-    console.log(sphere);
+    // console.log(sphere);
   }, []);
 
   useFrame((state, delta) => {
