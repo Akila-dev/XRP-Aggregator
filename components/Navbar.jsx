@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import axios from "axios";
 
 import { Logo, Button, MenuButton } from "@/components";
 
@@ -10,6 +11,16 @@ import { data } from "@/constants";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const [ripplePrice, setRipplePrice] = useState("_");
+
+  // Get Ripple Price
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_RIPPLE_PRICE_URL}`)
+      .then((response) => {
+        setRipplePrice(response.data.Price.toFixed(2));
+      });
+  }, []);
 
   return (
     <div className="fixed top-0 left-0 z-100 w-full shadow-lg shadow-dark/50">
@@ -17,7 +28,7 @@ const Navbar = () => {
       <div className="flex-between !justify-center md:!justify-between w-full container-x py-3 bg-dark">
         <p>
           <span>XRP Current Stats:</span>{" "}
-          <span className="text-gradient">1XP = 2USD</span>
+          <span className="text-gradient">1XP = ${ripplePrice}USD</span>
         </p>
         <Link
           href={`mailto:${data.contact_data.email}`}

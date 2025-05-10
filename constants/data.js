@@ -2,8 +2,8 @@ import { icons, images } from "@/constants";
 
 const menu_links = [
   {
-    label: "About Us",
-    url: "/#about-us",
+    label: "About",
+    url: "/#about",
   },
   {
     label: "Exchanges",

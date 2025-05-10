@@ -2,17 +2,19 @@
 
 import { useEffect, useState } from "react";
 
-import axios, { isCancel, AxiosError } from "axios";
+// SERVER ACTIONS
+import { getExchangeList } from "@/actions/get_exchange";
 
 const Exchanges = () => {
+  const [exchangeList, setExchangeList] = useState([]);
   useEffect(() => {
-    axios
-      .get(
-        "https://api.diadata.org/v1/assetQuotation/XRPL/0x0000000000000000000000000000000000000000"
-      )
-      .then((response) => {
-        console.log("🚀 ~ .then ~ response:", response);
-      });
+    getExchangeList().then((response) => {
+      // console.log(response);
+      response.res.data.map((element) =>
+        setExchangeList((prev) => [...prev, element.id])
+      );
+      // console.log(exchangeList);
+    });
   }, []);
 
   return (
