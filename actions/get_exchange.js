@@ -7,7 +7,7 @@ export const getCryptoList = async () => {
       `${process.env.NEXT_PUBLIC_COINMARKETCAP_BASE_URL}/v1/cryptocurrency/map`,
       {
         headers: {
-          "X-CMC_PRO_API_KEY": process.env.NEXT_PUBLIC_COINMARKETCAP_API_KEY,
+          "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY,
         },
       }
     );
@@ -35,7 +35,7 @@ export const getExchangeList = async () => {
           crypto_id: 1,
         },
         headers: {
-          "X-CMC_PRO_API_KEY": process.env.NEXT_PUBLIC_COINMARKETCAP_API_KEY,
+          "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY,
         },
       }
     );
@@ -63,7 +63,7 @@ export const getExchanges = async () => {
           crypto_id: 1,
         },
         headers: {
-          "X-CMC_PRO_API_KEY": process.env.NEXT_PUBLIC_COINMARKETCAP_API_KEY,
+          "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY,
         },
       }
     );
