@@ -8,7 +8,7 @@ import { getExchanges } from "@/actions/get_exchange";
 const Exchanges = () => {
   const [exchangeList, setExchangeList] = useState([]);
   useEffect(() => {
-    getExchanges("XRP/USDT").then((response) => {
+    getExchanges("XRP/USD").then((response) => {
       console.log(response);
       // console.log(exchangeList);
     });
