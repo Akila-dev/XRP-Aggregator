@@ -213,7 +213,7 @@ export const getExchanges = async (symbol) => {
     const tickerData = [];
     exchanges.forEach(async (exchangeClass) => {
       try {
-        const exchange = new exchangeClass({ enableRateLimit: true });
+        const exchange = new exchangeClass();
 
         // console.log({ markets: exchange.markets, market: exchange.market });
 
