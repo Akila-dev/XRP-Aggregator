@@ -1,4 +1,5 @@
 import { icons, images } from "@/constants";
+import { symbol } from "zod";
 
 const menu_links = [
   {
@@ -145,6 +146,61 @@ const partners_list = [
   icons.partner10,
 ];
 
+const symbols_list = [
+  {
+    label: "XRP",
+    symbol: "XRP/USDT",
+  },
+  {
+    label: "Bitcoin (BTC)",
+    symbol: "BTC/USDT",
+  },
+  {
+    label: "Ethereum (ETH)",
+    symbol: "ETH/USDT",
+  },
+  {
+    label: "Binance Coin (BNB)",
+    symbol: "BNB/USDT",
+  },
+  {
+    label: "Dogecoin (DOGE)",
+    symbol: "DOGE/USDT",
+  },
+  {
+    label: "Litecoin (LTC)",
+    symbol: "LTC/USDT",
+  },
+  {
+    label: "TRON (TRX)",
+    symbol: "TRX/USDT",
+  },
+  {
+    label: "Cardano (ADA)",
+    symbol: "ADA/USDT",
+  },
+  {
+    label: "Polkadot (DOT)",
+    symbol: "DOT/USDT",
+  },
+  {
+    label: "Chainlink (LINK)",
+    symbol: "LINK/USDT",
+  },
+  {
+    label: "Uniswap (UNI)",
+    symbol: "UNI/USDT",
+  },
+  {
+    label: "Aave (AAVE)",
+    symbol: "AAVE/USDT",
+  },
+  {
+    label: "Avalanche (AVAX)",
+    symbol: "AVAX/USDT",
+  },
+];
+
 export default {
   menu_links,
   about_us,
@@ -152,4 +208,5 @@ export default {
   faq_data,
   terms_of_use_data,
   partners_list,
+  symbols_list,
 };

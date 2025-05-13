@@ -144,6 +144,11 @@ textarea {
   @apply font-base text-[4.5vw] xs:text-sm md:text-[1.8vw] lg:text-[1.2vw] leading-[150%] font-medium text-fg;
 }
 
+button,
+a {
+  @apply cursor-pointer;
+}
+
 .mobile-nav-link {
   @apply text-[7vw] sm:text-[5vw] md:text-[4vw] lg:text-[2vw] font-display;
 }
@@ -214,6 +219,59 @@ textarea {
 
 .grid-3 {
   @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 w-full items-stretch;
+}
+
+/* .tablerow {
+  @apply grid grid-cols-7 gap-0 w-full relative pl-14;
+} */
+
+table * {
+  @apply !text-[0.95em] lg:text-[1em];
+}
+
+table .sn {
+  @apply !absolute !top-0 !left-0 !w-14 text-center py-2 px-3 z-10;
+}
+
+table td,
+table th {
+  @apply px-3 py-2;
+}
+
+tbody tr:hover {
+  @apply bg-card/50 backdrop-blur-2xl;
+}
+
+.th {
+  @apply hover:!bg-card/50 !cursor-pointer pr-4.5;
+}
+.tablerow td {
+  @apply text-right;
+}
+
+.tablerow td:nth-child(2),
+.tablerow td:nth-child(3) {
+  @apply text-left;
+}
+
+/* table tr:nth-child(even) {
+  @apply bg-card;
+}
+
+table tr:nth-child(odd) {
+  @apply bg-dark;
+} */
+
+.tablerow th:nth-child(1),
+.tablerow td:nth-child(1) {
+  @apply col-span-2;
+}
+
+.tablerow th:nth-child(3),
+.tablerow td:nth-child(3),
+.tablerow th:nth-child(4),
+.tablerow td:nth-child(4) {
+  @apply col-span-1;
 }
 
 .show-md {
