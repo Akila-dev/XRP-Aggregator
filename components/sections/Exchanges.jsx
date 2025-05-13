@@ -10,6 +10,7 @@ import { ExchangesTable, Loading } from "@/components";
 
 const Exchanges = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [showNetworkError, setShowNetworkError] = useState(false);
   const [showCryptoList, setShowCryptoList] = useState(false);
   const [selectedSymbolQuery, setSelectedSymbolQuery] = useState("XRP/USDT");
   const [selectedSymbolLabel, setSelectedSymbolLabel] = useState("XRP");
@@ -17,40 +18,55 @@ const Exchanges = () => {
   const [filteredExchangeData, setFilteredExchangeData] = useState([]);
 
   const filterExchangeData = (data, symbol) => {
-    const prev_data = data;
+    const prev_data = [...data];
     const filteredData = prev_data.map((item, i) => {
-      item.symbol = item.tickers[symbol].symbol;
-      item.price = item.tickers[symbol].last ? item.tickers[symbol].last : 0;
-      item.volume24h = item.tickers[symbol].quoteVolume
-        ? item.tickers[symbol].quoteVolume
-        : 0;
-      item.change24h = item.tickers[symbol].change
-        ? item.tickers[symbol].change
-        : 0;
-      item.high24h = item.tickers[symbol].high ? item.tickers[symbol].high : 0;
-      item.low24h = item.tickers[symbol].low ? item.tickers[symbol].low : 0;
-      return item;
+      if (item.tickers[symbol]) {
+        item.symbol = item.tickers[symbol].symbol;
+        item.price = item.tickers[symbol].last ? item.tickers[symbol].last : 0;
+        item.volume24h = item.tickers[symbol].quoteVolume
+          ? item.tickers[symbol].quoteVolume
+          : 0;
+        item.change24h = item.tickers[symbol].change
+          ? item.tickers[symbol].change
+          : 0;
+        item.high24h = item.tickers[symbol].high
+          ? item.tickers[symbol].high
+          : 0;
+        item.low24h = item.tickers[symbol].low ? item.tickers[symbol].low : 0;
+
+        return item;
+      }
     });
 
     setFilteredExchangeData(filteredData);
   };
 
-  // * FETCH DATA FUNCTION
-  const fetchExchangeData = () => {
-    setIsLoading(true);
-    getExchanges(selectedSymbolQuery).then((response) => {
-      // console.log(response);
-      setExchangeData(response.res);
-      filterExchangeData(response.res, selectedSymbolQuery);
-
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
-    });
-  };
-
   // *FETCH DATA ON PAGE LOAD
   useEffect(() => {
+    // * FETCH DATA FUNCTION
+    const fetchExchangeData = async () => {
+      setIsLoading(true);
+      // const exchanges_list = await getExchanges(selectedSymbolQuery)
+
+      await getExchanges(selectedSymbolQuery).then((response) => {
+        console.log(response);
+        if (response.status) {
+          if (response.status === 200) {
+            setExchangeData(response.res);
+            setShowNetworkError(false);
+          } else {
+            setShowNetworkError(true);
+          }
+        } else {
+          setShowNetworkError(true);
+        }
+
+        setIsLoading(false);
+
+        filterExchangeData(exchangeData, selectedSymbolQuery);
+      });
+    };
+
     fetchExchangeData();
   }, []);
 
@@ -111,13 +127,16 @@ const Exchanges = () => {
           <Loading />
         ) : (
           <div>
-            {exchangeData &&
-            exchangeData.length > 0 &&
-            filteredExchangeData &&
-            filteredExchangeData.length > 0 ? (
-              <ExchangesTable data={filteredExchangeData} />
-            ) : (
+            {showNetworkError ? (
               <p className="p-4">Network Error, Please Try Again</p>
+            ) : (
+              <div>
+                {filteredExchangeData && filteredExchangeData.length > 0 ? (
+                  <ExchangesTable data={filteredExchangeData} />
+                ) : (
+                  <p className="p-4">Couldn't Find Any Data to display</p>
+                )}
+              </div>
             )}
           </div>
         )}

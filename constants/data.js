@@ -164,6 +164,10 @@ const symbols_list = [
     symbol: "BNB/USDT",
   },
   {
+    label: "Solana (SOL)",
+    symbol: "SOL/USDT",
+  },
+  {
     label: "Dogecoin (DOGE)",
     symbol: "DOGE/USDT",
   },
