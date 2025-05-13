@@ -70,7 +70,7 @@ const Exchanges = () => {
                       setSelectedSymbolLabel(symbol.label);
                       setShowCryptoList(false);
                     }}
-                    className={`w-full text-left px-4 py-2 ${
+                    className={`w-full text-left px-4 py-2 hover:!bg-card/50 hover:backdrop-blur-3xl ${
                       selectedSymbolLabel === symbol.label
                         ? "bg-dark/50 backdrop-blur-3xl text-gradient"
                         : ""
