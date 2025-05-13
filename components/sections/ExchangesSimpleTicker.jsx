@@ -14,38 +14,16 @@ const Exchanges = () => {
   const [selectedSymbolQuery, setSelectedSymbolQuery] = useState("XRP/USDT");
   const [selectedSymbolLabel, setSelectedSymbolLabel] = useState("XRP");
   const [exchangeData, setExchangeData] = useState([]);
-  const [filteredExchangeData, setFilteredExchangeData] = useState([]);
-
-  const filterExchangeData = (data, symbol) => {
-    const prev_data = data;
-    const filteredData = prev_data.map((item, i) => {
-      item.symbol = item.tickers[symbol].symbol;
-      item.price = item.tickers[symbol].last ? item.tickers[symbol].last : 0;
-      item.volume24h = item.tickers[symbol].quoteVolume
-        ? item.tickers[symbol].quoteVolume
-        : 0;
-      item.change24h = item.tickers[symbol].change
-        ? item.tickers[symbol].change
-        : 0;
-      item.high24h = item.tickers[symbol].high ? item.tickers[symbol].high : 0;
-      item.low24h = item.tickers[symbol].low ? item.tickers[symbol].low : 0;
-      return item;
-    });
-
-    setFilteredExchangeData(filteredData);
-  };
 
   // * FETCH DATA FUNCTION
   const fetchExchangeData = () => {
     setIsLoading(true);
     getExchanges(selectedSymbolQuery).then((response) => {
-      // console.log(response);
-      setExchangeData(response.res);
-      filterExchangeData(response.res, selectedSymbolQuery);
-
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
+      console.log(response);
+      // setExchangeData(response.res);
+      // setTimeout(() => {
+      //   setIsLoading(false);
+      // }, 1000);
     });
   };
 
@@ -56,8 +34,8 @@ const Exchanges = () => {
 
   // *FETCH DATA ON SYMBOL CHANGE
   useEffect(() => {
-    filterExchangeData(exchangeData, selectedSymbolQuery);
-  }, [exchangeData, selectedSymbolQuery]);
+    fetchExchangeData();
+  }, [selectedSymbolQuery]);
 
   return (
     <div className="container border-y border-dark bg-lines space-y-5 lg:space-y-6">
@@ -82,7 +60,7 @@ const Exchanges = () => {
         {/* Dropdowm List */}
         {showCryptoList && (
           <div className="absolute top-[120%] right-0 w-50 md:w-55 dark-gradient-2 rounded-lg border border-card shadow-xl shadow-card/10 overflow-hidden z-100">
-            <ul className="flex flex-col w-full divide-y divide-card/30 max-h-100 overflow-y-auto no-scrollbar">
+            <ul className="flex flex-col w-full divide-y divide-card/30 max-h-100 overflow-y-auto">
               {data.symbols_list.map((symbol, i) => (
                 <li key={i} className="w-full">
                   <button
@@ -111,11 +89,8 @@ const Exchanges = () => {
           <Loading />
         ) : (
           <div>
-            {exchangeData &&
-            exchangeData.length > 0 &&
-            filteredExchangeData &&
-            filteredExchangeData.length > 0 ? (
-              <ExchangesTable data={filteredExchangeData} />
+            {exchangeData && exchangeData.length > 0 ? (
+              <ExchangesTable data={exchangeData} />
             ) : (
               <p className="p-4">Network Error, Please Try Again</p>
             )}

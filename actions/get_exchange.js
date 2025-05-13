@@ -306,13 +306,29 @@ export const getExchanges = async (symbol) => {
     ccxt.zonda,
   ];
 
+  const symbols = [
+    "XRP/USDT",
+    "BTC/USDT",
+    "ETH/USDT",
+    "BNB/USDT",
+    "DOGE/USDT",
+    "LTC/USDT",
+    "TRX/USDT",
+    "ADA/USDT",
+    "DOT/USDT",
+    "LINK/USDT",
+    "UNI/USDT",
+    "AAVE/USDT",
+    "AVAX/USDT",
+  ];
+
   try {
     // const exchange = new ccxt.binance({ enableRateLimit: true });
     // const ticker = await exchange.fetch_ticker("XRP/USDT");
     // console.log(ticker);
 
     const tickerData = [];
-    exchanges.forEach(async (exchangeClass) => {
+    exchanges.forEach(async (exchangeClass, i) => {
       try {
         const httpsProxy = `http://${process.env.HTTP_PROXY}:80`;
         let exchange;
@@ -327,37 +343,32 @@ export const getExchanges = async (symbol) => {
           });
         }
 
-        if (exchange.has["fetchTicker"]) {
+        if (exchange.has["fetchTickers"]) {
           const ticker = await exchange.fetchTicker(symbol);
+          const tickers = await exchange.fetchTickers(symbols);
 
           if (ticker) {
             tickerData.push({
+              id: tickerData.length + 1,
+              // id: i,
               name: exchange.name,
               logo: exchange.urls.logo,
               url: exchange.urls.www,
-              price: ticker.last,
               symbol: ticker.symbol,
-              volume24h: ticker.quoteVolume,
-              change24h: ticker.change,
-              high24h: ticker.high,
-              low24h: ticker.low,
+              price: ticker.last ? ticker.last : 0,
+              volume24h: ticker.quoteVolume ? ticker.quoteVolume : 0,
+              change24h: ticker.change ? ticker.change : 0,
+              high24h: ticker.high ? ticker.high : 0,
+              low24h: ticker.low ? ticker.low : 0,
 
               // exchange: exchange,
+              ticker: ticker,
+              tickers: tickers,
             });
           } else {
             console.log("Couldn't get Ticker Data from " + exchange.name);
           }
         }
-
-        // else {
-        //   tickerData.push({
-        //     name: exchange.name,
-        //     logo: exchange.urls.logo,
-        //     symbol: "-",
-        //     price: "-",
-        //     volume24h: "-",
-        //   });
-        // }
       } catch (error) {
         // console.log(error);
         console.log("Couldn't get Ticker Data");
