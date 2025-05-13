@@ -42,7 +42,8 @@ const Exchanges = () => {
       {/* DropDown Section */}
       <div className="relative w-fit">
         <div className="flex-v-center flex-wrap">
-          Crypto<span className="show-md">currency</span>:
+          <span className="hide-md">Crypto:</span>
+          <span className="show-md">Cryptocurrency:</span>
           <button
             type="button"
             onClick={() => setShowCryptoList((prev) => !prev)}
@@ -91,7 +92,7 @@ const Exchanges = () => {
             {exchangeData && exchangeData.length > 0 ? (
               <ExchangesTable data={exchangeData} />
             ) : (
-              <p>Network Error, Please Try Again</p>
+              <p className="p-4">Network Error, Please Try Again</p>
             )}
           </div>
         )}

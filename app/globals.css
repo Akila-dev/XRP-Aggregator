@@ -239,11 +239,11 @@ table th {
 }
 
 tbody tr:hover {
-  @apply bg-card/50 backdrop-blur-2xl;
+  @apply bg-neon/50 backdrop-blur-2xl;
 }
 
 .th {
-  @apply hover:!bg-card/50 !cursor-pointer pr-4.5;
+  @apply hover:!bg-neon/50 !cursor-pointer;
 }
 .tablerow td {
   @apply text-right;

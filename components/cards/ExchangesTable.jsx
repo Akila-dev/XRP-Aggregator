@@ -37,12 +37,17 @@ const ExchangesTable = ({ data }) => {
     "24h High",
     "24h Low",
   ];
+
+  const navigateTo = (e, url) => {
+    e.preventDefault(); // Prevents default link behavior if needed
+    window.open(url, "_blank");
+  };
   return (
     <div className="w-full overflow-y-auto no-scrollbar">
       <table className="w-full min-w-[720px] overflow-hidden rounded-lg">
         <thead className="w-full relative !text-white">
           <tr className="tablerow">
-            <th className="!text-center relative th">
+            <th className="!text-left relative th !min-w-10 lg:!max-w-10">
               #<SortIcon />
             </th>
             {headers.map((header, index) => (
@@ -55,11 +60,11 @@ const ExchangesTable = ({ data }) => {
         <tbody className="w-full border-t divide-y divide-card/50 border-card/50">
           {data.map((datum, i) => (
             <tr
-              onClick={() => navigateTo(datum.url)}
+              onClick={(e) => navigateTo(e, datum.url)}
               key={i}
               className="tablerow"
             >
-              <td className="!text-center">{i + 1}</td>
+              <td className="!text-center !min-w-10 lg:!max-w-10">{i + 1}</td>
               <td className="">{datum.name}</td>
               <td className="">{datum.symbol}</td>
               <td className="">
