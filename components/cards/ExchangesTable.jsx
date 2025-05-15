@@ -11,14 +11,14 @@ const SortIcon = ({ isSorting, isAscending, className }) => {
         className ? className : ""
       }`}
     >
-      <div className="flex-center !flex-col !gap-0 h-4 lg:h-5 w-fit relative">
+      <div className="flex-center !flex-col !gap-0 h-4 lg:h-5 w-fit relative !text-[0.95em] lg:text-[1em]">
         <BiCaretUp
-          className={`text-base absolute top-0 -translate-y-[7%] right-0 ${
+          className={`!text-[0.95em] lg:text-[1em] absolute top-0 -translate-y-[7%] right-0 ${
             isSorting && isAscending ? "text-white" : "text-card"
           }`}
         />
         <BiCaretDown
-          className={`text-base absolute bottom-0 translate-y-[7%] right-0 ${
+          className={`!text-[0.95em] lg:text-[1em] absolute bottom-0 translate-y-[7%] right-0 ${
             isSorting && !isAscending ? "text-white" : "text-card"
           }`}
         />
@@ -30,7 +30,7 @@ const SortIcon = ({ isSorting, isAscending, className }) => {
 const ExchangesTable = ({ data }) => {
   const [sortedData, setSortedData] = useState([...data]);
   const [activeType, setActiveType] = useState("sn");
-  const [sortDirection, setSortDirection] = useState(0);
+  const [sortDirection, setSortDirection] = useState(1);
   // const [updateSorting, setUpdateSorting] = useState({
   //   sn:
   // })
@@ -52,12 +52,8 @@ const ExchangesTable = ({ data }) => {
 
   const handleSort = (type) => {
     if (type !== headers[0] && type !== headers[1]) {
-      // if (activeType === type){
-      //   setSortDirection((prev) => (prev === 0 ? 1 : 0)); // Sort in descending order
-      // }
-
-      setSortDirection((prev) => (prev === 0 ? 1 : 0)); // Sort in descending order
-      setActiveType(type); // Sort in ascending order
+      setSortDirection((prev) => (prev === 0 ? 1 : 0)); // Sort in ascending/descending order
+      setActiveType(type);
 
       let prevData = [...data];
 
@@ -104,7 +100,7 @@ const ExchangesTable = ({ data }) => {
 
   return (
     <div className="w-full overflow-y-auto no-scrollbar">
-      <table className="w-full min-w-[720px] overflow-hidden rounded-lg">
+      <table className="w-full min-w-[820px] overflow-hidden rounded-lg">
         <thead className="w-full relative !text-white">
           <tr className="tablerow">
             <th

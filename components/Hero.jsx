@@ -13,19 +13,12 @@ export default function Hero() {
   const container = useRef();
 
   return (
-    <div
-      className="relative w-full min-h-screen lg:h-screen text-center overflow-hidden bg-cover bg-center"
-      // style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
-    >
+    <div className="relative w-full min-h-screen lg:h-screen text-center overflow-hidden bg-cover bg-center">
       <HeroCanvas />
-      {/* <div
-        className="absolute top-0 left-0 w-full h-[65%] object-cover bg-bottom bg-opacity-50"
-        style={{ backgroundImage: "url('/images/bg-lines.png')" }}
-      /> */}
-      <div className="w-full h-full flex-center pt-20 pb-34">
+      <div className="w-full h-full flex-center pt-[10em] lg:pt-[7em] pb-34 md:h-screen lg:h-full">
         <TextDiv
           ref={container}
-          className="gsap-hero-container container-x max-w-full md:max-w-[90vw] lg:max-w-[65vw] relative flex-center flex-col !gap-3 pt-16 xs:pt-10"
+          className="gsap-hero-container container-x max-w-full md:max-w-[90vw] lg:max-w-[65vw] relative flex-center flex-col !gap-3 pt-5"
         >
           <h1 className="uppercase gsap-hero-h1">
             Looking to get into the <span>XRP</span> ecosystem?

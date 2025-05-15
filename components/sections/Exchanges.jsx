@@ -149,8 +149,15 @@ const Exchanges = () => {
             />
           </button>
           <button
-            onClick={() => fetchExchangeData()}
-            className="bg-dark/50 text-neon p-[0.5em] size-[2.5em] flex-center border border-card shadow-xl shadow-card/10 rounded-full cursor-pointer"
+            onClick={() => {
+              setIsLoading(true);
+              fetchExchangeData();
+            }}
+            className={`"bg-dark/50 text-neon p-[0.5em] size-[2.5em] flex-center border border-card shadow-xl shadow-card/10 rounded-full cursor-pointer ${
+              isLoading
+                ? "animate-spin opacity-90 !pointer-events-none"
+                : "pointer-events-auto"
+            }`}
           >
             <BsArrowRepeat className="text-neon scale-125" />
           </button>

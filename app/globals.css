@@ -225,9 +225,9 @@ a {
   @apply grid grid-cols-7 gap-0 w-full relative pl-14;
 } */
 
-table * {
+/* table * {
   @apply !text-[0.95em] lg:text-[1em];
-}
+} */
 
 table .sn {
   @apply !absolute !top-0 !left-0 !w-14 text-center py-2 px-3 z-10;
