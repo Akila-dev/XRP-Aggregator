@@ -9,6 +9,7 @@ import { BsArrowRepeat } from "react-icons/bs";
 import { data, my_exchange_data } from "@/constants";
 
 import { ExchangesTable, Loading } from "@/components";
+import { time } from "framer-motion";
 
 const Exchanges = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +25,7 @@ const Exchanges = () => {
 
     if (ex_data && ex_data.length > 0 && symbol) {
       const prev_data = [...my_exchange_data.data, ...ex_data];
-      console.log("🚀 ~ filterExchangeData ~ ex_data:", ex_data);
+      // console.log("🚀 ~ filterExchangeData ~ ex_data:", ex_data);
       const data_no_null = prev_data.filter(
         (item) => item !== null && item !== undefined
       );
@@ -59,6 +60,11 @@ const Exchanges = () => {
         } else {
           item.id = i + 1;
           item.symbol = symbol;
+          item.price = 0;
+          item.volume24h = 0;
+          item.high24h = 0;
+          item.low24h = 0;
+
           return item;
         }
       });
@@ -78,6 +84,7 @@ const Exchanges = () => {
         try {
           const exchange = new exchanges[exchangeString]({
             enableRateLimit: true,
+            timeout: 30000,
           });
           const response = await exchange.fetchTickers(data.exchange_symbols);
 

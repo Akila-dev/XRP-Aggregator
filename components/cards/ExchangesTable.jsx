@@ -142,22 +142,22 @@ const ExchangesTable = ({ data }) => {
               <td className="">{datum.symbol}</td>
               <td className="">
                 {new Intl.NumberFormat("en-US", currencyFormat).format(
-                  Number(datum.price).toFixed(2)
+                  Number(datum.price).toFixed(3)
                 )}
               </td>
               <td className="">
                 {new Intl.NumberFormat("en-US", currencyFormat).format(
-                  Number(datum.volume24h).toFixed(2)
+                  Number(datum.volume24h).toFixed(3)
                 )}
               </td>
               <td className="">
                 {new Intl.NumberFormat("en-US", currencyFormat).format(
-                  Number(datum.high24h).toFixed(2)
+                  Number(datum.high24h).toFixed(3)
                 )}
               </td>
               <td className="">
                 {new Intl.NumberFormat("en-US", currencyFormat).format(
-                  Number(datum.low24h).toFixed(2)
+                  Number(datum.low24h).toFixed(3)
                 )}
               </td>
             </tr>
