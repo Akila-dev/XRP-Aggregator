@@ -6,7 +6,7 @@ import ccxt, { exchanges } from "ccxt";
 
 import { IoIosArrowDown } from "react-icons/io";
 import { BsArrowRepeat } from "react-icons/bs";
-import { data } from "@/constants";
+import { data, my_exchange_data } from "@/constants";
 
 import { ExchangesTable, Loading } from "@/components";
 
@@ -21,8 +21,8 @@ const Exchanges = () => {
 
   const filterExchangeData = (ex_data, symbol) => {
     if (ex_data && ex_data.length > 0 && symbol) {
-      const prev_data = [...ex_data];
-      // console.log("🚀 ~ filterExchangeData ~ ex_data:", ex_data);
+      const prev_data = [...my_exchange_data.data, ...ex_data];
+      console.log("🚀 ~ filterExchangeData ~ ex_data:", ex_data);
       const data_no_null = prev_data.filter(
         (item) => item !== null && item !== undefined
       );
@@ -41,11 +41,7 @@ const Exchanges = () => {
               ? item.tickers[symbol].quoteVolume
               : 0
             : 0;
-          item.change24h = item.tickers[symbol]
-            ? item.tickers[symbol].change
-              ? item.tickers[symbol].change
-              : 0
-            : 0;
+
           item.high24h = item.tickers[symbol]
             ? item.tickers[symbol].high
               ? item.tickers[symbol].high
@@ -80,8 +76,6 @@ const Exchanges = () => {
         try {
           const exchange = new exchanges[exchangeString]({
             enableRateLimit: true,
-            // httpAgent: "http://127.0.0.1:1087",
-            // verbose: false,
           });
           const response = await exchange.fetchTickers(data.exchange_symbols);
 
@@ -93,7 +87,6 @@ const Exchanges = () => {
             symbol: "",
             price: 0,
             volume24h: 0,
-            change24h: 0,
             high24h: 0,
             low24h: 0,
             tickers: response,

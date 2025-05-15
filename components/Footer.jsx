@@ -61,13 +61,13 @@ const Footer = () => {
             </Link>
           </p>
           <p className="text-[#7A7A7B] text-[12px] text-center">
-            © 2025 XRPAggregator. All rights reserved
+            © 2025 XRPScanTrade. All rights reserved
           </p>
         </div>
       </div>
       <div className="relative w-full h-[8vw] md:h-[11vw]">
-        <h1 className="!text-[11.5vw] text-center absolute top-0 left-1/2 -translate-x-1/2 opacity-20 white-text-gradient">
-          XRPAggregator
+        <h1 className="!text-[12.5vw] text-center absolute top-0 left-1/2 -translate-x-1/2 opacity-20 white-text-gradient">
+          XRPScanTrade
         </h1>
       </div>
     </div>
