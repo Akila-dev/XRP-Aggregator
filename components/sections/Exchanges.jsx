@@ -6,8 +6,7 @@ import ccxt, { exchanges } from "ccxt";
 
 import { IoIosArrowDown } from "react-icons/io";
 import { data } from "@/constants";
-// SERVER ACTIONS
-import { getExchanges } from "@/actions/get_exchange";
+
 import { ExchangesTable, Loading } from "@/components";
 
 const Exchanges = () => {
@@ -16,105 +15,115 @@ const Exchanges = () => {
   const [showCryptoList, setShowCryptoList] = useState(false);
   const [selectedSymbolQuery, setSelectedSymbolQuery] = useState("XRP/USDT");
   const [selectedSymbolLabel, setSelectedSymbolLabel] = useState("XRP");
-  const [exchangeData, setExchangeData] = useState();
-  const [filteredExchangeData, setFilteredExchangeData] = useState();
+  const [exchangeData, setExchangeData] = useState([]);
+  const [filteredExchangeData, setFilteredExchangeData] = useState([]);
 
-  const filterExchangeData = (data, symbol) => {
-    const prev_data = [...data];
-    const filteredData = prev_data.map((item, i) => {
-      if (item.tickers[symbol]) {
-        item.symbol = symbol;
-        item.price = item.tickers[symbol]
-          ? item.tickers[symbol].last
+  const filterExchangeData = (ex_data, symbol) => {
+    if (ex_data && ex_data.length > 0 && symbol) {
+      const prev_data = [...ex_data];
+      // console.log("🚀 ~ filterExchangeData ~ ex_data:", ex_data);
+      const data_no_null = prev_data.filter(
+        (item) => item !== null && item !== undefined
+      );
+
+      const filteredData = data_no_null.map((item, i) => {
+        if (item !== undefined && item && item.tickers[symbol]) {
+          item.id = i + 1;
+          item.symbol = symbol;
+          item.price = item.tickers[symbol]
             ? item.tickers[symbol].last
-            : 0
-          : 0;
-        item.volume24h = item.tickers[symbol]
-          ? item.tickers[symbol].quoteVolume
+              ? item.tickers[symbol].last
+              : 0
+            : 0;
+          item.volume24h = item.tickers[symbol]
             ? item.tickers[symbol].quoteVolume
-            : 0
-          : 0;
-        item.change24h = item.tickers[symbol]
-          ? item.tickers[symbol].change
+              ? item.tickers[symbol].quoteVolume
+              : 0
+            : 0;
+          item.change24h = item.tickers[symbol]
             ? item.tickers[symbol].change
-            : 0
-          : 0;
-        item.high24h = item.tickers[symbol]
-          ? item.tickers[symbol].high
+              ? item.tickers[symbol].change
+              : 0
+            : 0;
+          item.high24h = item.tickers[symbol]
             ? item.tickers[symbol].high
-            : 0
-          : 0;
-        item.low24h = item.tickers[symbol]
-          ? item.tickers[symbol].low
+              ? item.tickers[symbol].high
+              : 0
+            : 0;
+          item.low24h = item.tickers[symbol]
             ? item.tickers[symbol].low
-            : 0
-          : 0;
+              ? item.tickers[symbol].low
+              : 0
+            : 0;
 
-        return item;
-      }
-    });
+          return item;
+        } else {
+          item.id = i + 1;
+          item.symbol = symbol;
+          return item;
+        }
+      });
 
-    setFilteredExchangeData(filteredData);
+      setFilteredExchangeData(filteredData);
+      // console.log(filteredData);
+    }
   };
 
   // ! Fetch Data function
   const fetchExchangeData = async () => {
-    // setIsLoading(true);
-    console.log("loading start");
+    setIsLoading(true);
+    console.log("loading tickers start");
+    // ! Fetch Exchange Data
     try {
-      // const exchange = new exchanges[data.exchanges_list[1]]({
-      //   proxyUrl: process.env.HTTP_PROXY2,
-      // });
-      const exchange = new exchanges[data.exchanges_list[3]]({
-        enableRateLimit: true,
-        proxyUrlhttpProxy: "http://127.0.0.1:1087",
-      });
-      // exchange.proxyUrl = data.https_proxies[2];
-      const response = await exchange.fetchTickers(data.exchange_symbols);
-      const res_data = Object.values(response);
-      setExchangeData(res_data);
-      console.log("🚀 ~ fetchExchangeData ~ data:", res_data);
-    } catch (error) {
-      console.error("Error fetching ticker data:", error);
-      // setError(error.message);
-    }
-    // setIsLoading(false);
-    console.log("loading end");
-  };
+      const exchangeList = data.exchanges_list.map(async (exchangeString) => {
+        try {
+          const exchange = new exchanges[exchangeString]({
+            enableRateLimit: true,
+            // httpAgent: "http://127.0.0.1:1087",
+            // verbose: false,
+          });
+          const response = await exchange.fetchTickers(data.exchange_symbols);
 
-  // *FETCH DATA ON PAGE LOAD
-  // useEffect(() => {
-  //   // fetchExchangeData();
-  //   // // * FETCH DATA FUNCTION
-  //   // const fetchExchangeData = async () => {
-  //   //   setIsLoading(true);
-  //   //   try {
-  //   //     const response = await fetch(`/api/tickers`);
-  //   //     if (!response.ok) {
-  //   //       setShowNetworkError(true);
-  //   //       throw new Error("Network response was not ok");
-  //   //     }
-  //   //     const data = await response.json();
-  //   //     setExchangeData(data);
-  //   //     console.log("🚀 ~ fetchExchangeData ~ data:", data);
-  //   //   } catch (error) {
-  //   //     console.error("Error fetching ticker data:", error);
-  //   //     // setError(error.message);
-  //   //   }
-  //   //   setIsLoading(false);
-  //   // };
-  //   // fetchExchangeData();
-  // }, []);
+          return {
+            id: 0,
+            name: exchange.name,
+            logo: exchange.urls.logo,
+            url: exchange.urls.www,
+            symbol: "",
+            price: 0,
+            volume24h: 0,
+            change24h: 0,
+            high24h: 0,
+            low24h: 0,
+            tickers: response,
+          };
+        } catch (error) {
+          // console.log("EXCHANGE DATA FAILED!");
+          return null;
+        }
+      });
+
+      // ! Set Exchange Data to the respone data
+      setExchangeData(await Promise.all(exchangeList));
+    } catch (error) {
+      // console.error("Error fetching ticker data:");
+      // setError(error.message);
+      setShowNetworkError(true);
+    }
+
+    filterExchangeData(exchangeData, selectedSymbolQuery);
+    setIsLoading(false);
+    console.log("loading tickers end");
+  };
 
   useEffect(() => {
     fetchExchangeData();
-    // filterExchangeData(exchangeData, selectedSymbolQuery);
-  }, [selectedSymbolQuery]);
+  }, []);
 
   // *FETCH DATA ON SYMBOL CHANGE
-  // useEffect(() => {
-  //   filterExchangeData(exchangeData, selectedSymbolQuery);
-  // }, [exchangeData, selectedSymbolQuery]);
+  useEffect(() => {
+    filterExchangeData(exchangeData, selectedSymbolQuery);
+  }, [exchangeData, selectedSymbolQuery]);
 
   return (
     <div className="container border-y border-dark bg-lines space-y-5 lg:space-y-6">

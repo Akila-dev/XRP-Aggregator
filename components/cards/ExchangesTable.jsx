@@ -52,12 +52,12 @@ const ExchangesTable = ({ data }) => {
 
   const handleSort = (type) => {
     if (type !== headers[0] && type !== headers[1]) {
-      if (type === activeType) {
-        setSortDirection((prev) => (prev === 0 ? 1 : 0)); // Sort in descending order
-      } else {
-        setSortDirection(0);
-        setActiveType(type); // Sort in ascending order
-      }
+      // if (activeType === type){
+      //   setSortDirection((prev) => (prev === 0 ? 1 : 0)); // Sort in descending order
+      // }
+
+      setSortDirection((prev) => (prev === 0 ? 1 : 0)); // Sort in descending order
+      setActiveType(type); // Sort in ascending order
 
       let prevData = [...data];
 
