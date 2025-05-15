@@ -1,155 +1,265 @@
-// "use server";
+"use server";
 
-import ccxt from "ccxt";
+// import { HttpProxyAgent } from "http-proxy-agent";
+
+import ccxt, {
+  alpaca,
+  apex,
+  ascendex,
+  bigone,
+  binance,
+  bingx,
+  bit2c,
+  bitbank,
+  bitbns,
+  bitfinex,
+  bitflyer,
+  bitget,
+  bithumb,
+  bitmart,
+  bitmex,
+  bitopro,
+  bitrue,
+  bitso,
+  bitstamp,
+  bitteam,
+  bitvavo,
+  bl3p,
+  blockchaincom,
+  blofin,
+  btcalpha,
+  btcbox,
+  btcmarkets,
+  btcturk,
+  bybit,
+  cex,
+  coinbase,
+  coinbaseexchange,
+  coinbaseinternational,
+  coincatch,
+  coincheck,
+  coinex,
+  coinlist,
+  coinmate,
+  coinmetro,
+  coinone,
+  coinsph,
+  coinspot,
+  cryptocom,
+  cryptomus,
+  defx,
+  delta,
+  deribit,
+  derive,
+  digifinex,
+  ellipx,
+  exmo,
+  gate,
+  gemini,
+  hashkey,
+  hitbtc,
+  hollaex,
+  htx,
+  huobijp,
+  hyperliquid,
+  idex,
+  independentreserve,
+  indodax,
+  kraken,
+  krakenfutures,
+  kucoin,
+  kucoinfutures,
+  kuna,
+  latoken,
+  lbank,
+  luno,
+  mercado,
+  mexc,
+  ndax,
+  novadax,
+  oceanex,
+  okcoin,
+  okx,
+  onetrading,
+  oxfun,
+  p2b,
+  paradex,
+  paymium,
+  phemex,
+  poloniex,
+  probit,
+  timex,
+  tokocrypto,
+  tradeogre,
+  upbit,
+  vertex,
+  wavesexchange,
+  whitebit,
+  woo,
+  woofipro,
+  xt,
+  yobit,
+  zaif,
+  zonda,
+} from "ccxt";
+
+const exchanges = [
+  alpaca,
+  apex,
+  ascendex,
+  bigone,
+  binance,
+  bingx,
+  bit2c,
+  bitbank,
+  bitbns,
+  bitfinex,
+  bitflyer,
+  bitget,
+  bithumb,
+  bitmart,
+  bitmex,
+  bitopro,
+  bitrue,
+  bitso,
+  bitstamp,
+  bitteam,
+  bitvavo,
+  bl3p,
+  blockchaincom,
+  blofin,
+  btcalpha,
+  btcbox,
+  btcmarkets,
+  btcturk,
+  bybit,
+  cex,
+  coinbase,
+  coinbaseexchange,
+  coinbaseinternational,
+  coincatch,
+  coincheck,
+  coinex,
+  coinlist,
+  coinmate,
+  coinmetro,
+  coinone,
+  coinsph,
+  coinspot,
+  cryptocom,
+  cryptomus,
+  defx,
+  delta,
+  deribit,
+  derive,
+  digifinex,
+  ellipx,
+  exmo,
+  gate,
+  gemini,
+  hashkey,
+  hitbtc,
+  hollaex,
+  htx,
+  huobijp,
+  hyperliquid,
+  idex,
+  independentreserve,
+  indodax,
+  kraken,
+  krakenfutures,
+  kucoin,
+  kucoinfutures,
+  kuna,
+  latoken,
+  lbank,
+  luno,
+  mercado,
+  mexc,
+  ndax,
+  novadax,
+  oceanex,
+  okcoin,
+  okx,
+  onetrading,
+  oxfun,
+  p2b,
+  paradex,
+  paymium,
+  phemex,
+  poloniex,
+  probit,
+  timex,
+  tokocrypto,
+  tradeogre,
+  upbit,
+  vertex,
+  wavesexchange,
+  whitebit,
+  woo,
+  woofipro,
+  xt,
+  yobit,
+  zaif,
+  zonda,
+];
+
+const symbols = [
+  "XRP/USDT",
+  "BTC/USDT",
+  "ETH/USDT",
+  "BNB/USDT",
+  "SOL/USDT",
+  "DOGE/USDT",
+  "LTC/USDT",
+  "TRX/USDT",
+  "ADA/USDT",
+  "DOT/USDT",
+  "LINK/USDT",
+  "UNI/USDT",
+  "AAVE/USDT",
+  "AVAX/USDT",
+];
 
 export async function getExchanges() {
-  const exchanges = [
-    ccxt.alpaca,
-    ccxt.apex,
-    ccxt.ascendex,
-    ccxt.bigone,
-    ccxt.binance,
-    ccxt.bingx,
-    ccxt.bit2c,
-    ccxt.bitbank,
-    ccxt.bitbns,
-    ccxt.bitfinex,
-    ccxt.bitflyer,
-    ccxt.bitget,
-    ccxt.bithumb,
-    ccxt.bitmart,
-    ccxt.bitmex,
-    ccxt.bitopro,
-    ccxt.bitrue,
-    ccxt.bitso,
-    ccxt.bitstamp,
-    ccxt.bitteam,
-    ccxt.bitvavo,
-    ccxt.bl3p,
-    ccxt.blockchaincom,
-    ccxt.blofin,
-    ccxt.btcalpha,
-    ccxt.btcbox,
-    ccxt.btcmarkets,
-    ccxt.btcturk,
-    ccxt.bybit,
-    ccxt.cex,
-    ccxt.coinbase,
-    ccxt.coinbaseexchange,
-    ccxt.coinbaseinternational,
-    ccxt.coincatch,
-    ccxt.coincheck,
-    ccxt.coinex,
-    ccxt.coinlist,
-    ccxt.coinmate,
-    ccxt.coinmetro,
-    ccxt.coinone,
-    ccxt.coinsph,
-    ccxt.coinspot,
-    ccxt.cryptocom,
-    ccxt.cryptomus,
-    ccxt.defx,
-    ccxt.delta,
-    ccxt.deribit,
-    ccxt.derive,
-    ccxt.digifinex,
-    ccxt.ellipx,
-    ccxt.exmo,
-    ccxt.gate,
-    ccxt.gemini,
-    ccxt.hashkey,
-    ccxt.hitbtc,
-    ccxt.hollaex,
-    ccxt.htx,
-    ccxt.huobijp,
-    ccxt.hyperliquid,
-    ccxt.idex,
-    ccxt.independentreserve,
-    ccxt.indodax,
-    ccxt.kraken,
-    ccxt.krakenfutures,
-    ccxt.kucoin,
-    ccxt.kucoinfutures,
-    ccxt.kuna,
-    ccxt.latoken,
-    ccxt.lbank,
-    ccxt.luno,
-    ccxt.mercado,
-    ccxt.mexc,
-    ccxt.ndax,
-    ccxt.novadax,
-    ccxt.oceanex,
-    ccxt.okcoin,
-    ccxt.okx,
-    ccxt.onetrading,
-    ccxt.oxfun,
-    ccxt.p2b,
-    ccxt.paradex,
-    ccxt.paymium,
-    ccxt.phemex,
-    ccxt.poloniex,
-    ccxt.probit,
-    ccxt.timex,
-    ccxt.tokocrypto,
-    ccxt.tradeogre,
-    ccxt.upbit,
-    ccxt.vertex,
-    ccxt.wavesexchange,
-    ccxt.whitebit,
-    ccxt.woo,
-    ccxt.woofipro,
-    ccxt.xt,
-    ccxt.yobit,
-    ccxt.zaif,
-    ccxt.zonda,
-  ];
-
-  const symbols = [
-    "XRP/USDT",
-    "BTC/USDT",
-    "ETH/USDT",
-    "BNB/USDT",
-    "SOL/USDT",
-    "DOGE/USDT",
-    "LTC/USDT",
-    "TRX/USDT",
-    "ADA/USDT",
-    "DOT/USDT",
-    "LINK/USDT",
-    "UNI/USDT",
-    "AAVE/USDT",
-    "AVAX/USDT",
-  ];
-
   try {
-    // const exchange = new ccxt.binance({ enableRateLimit: true });
+    // const exchange = new binance({ enableRateLimit: true });
     // const ticker = await exchange.fetch_ticker("XRP/USDT");
     // console.log(ticker);
 
     const tickerData = [];
-    exchanges.forEach(async (exchangeClass, i) => {
-      try {
-        const httpsProxy = `http://${process.env.HTTP_PROXY}:80`;
-        let exchange;
-        if (!ccxt.binance && !ccxt.gate) {
-          exchange = new exchangeClass({
-            enableRateLimit: true,
-            httpsProxy,
-          });
-        } else {
-          exchange = new exchangeClass({
-            enableRateLimit: true,
-          });
-        }
 
-        // const exchange = new exchangeClass({
-        //   enableRateLimit: true,
-        // });
+    exchanges.map(async (exchangeClass, i) => {
+      try {
+        // const httpsProxy = `http://${process.env.HTTPS_PROXY}:80`;
+        // let exchange;
+        // if (!binance && !gate) {
+        //   exchange = new exchangeClass({
+        //     enableRateLimit: true,
+        //     httpsProxy,
+        //   });
+        // } else {
+        //   exchange = new exchangeClass({
+        //     enableRateLimit: true,
+        //   });
+        // }
+
+        // const httpsProxy = new HttpProxyAgent(process.env.HTTP_PROXY2);
+
+        let exchange = new exchangeClass({
+          enableRateLimit: true,
+          // httpsProxy,
+        });
+
+        // exchange.proxyUrl = process.env.HTTP_PROXY2;
+        // exchange.socksProxy = process.env.SOCKS_PROXY;
 
         if (exchange.has["fetchTickers"]) {
-          const tickers = await exchange.fetchTickers(symbols);
+          try {
+            const tickers = await exchange.fetchTickers();
+            // const tickers = await exchange.fetchTickers(symbols);
+            console.log("SUCCESS: Got Ticker data from" + exchange.name);
 
-          if (tickers && tickers.length > 0) {
             tickerData.push({
               id: tickerData.length + 1,
               // id: i,
@@ -166,9 +276,14 @@ export async function getExchanges() {
               // exchange: exchange,
               tickers: tickers,
             });
-          } else {
-            console.log("Couldn't get Ticker Data from " + exchange.name);
+          } catch (error) {
+            console.log(
+              "FAILED: Couldn't get Ticker Data from " + exchange.name
+            );
+            console.log(error);
           }
+        } else {
+          console.log("Exchange can't fetch tickers");
         }
       } catch (error) {
         // console.log(error);
@@ -176,10 +291,18 @@ export async function getExchanges() {
       }
     });
 
-    return {
-      res: tickerData,
-      status: 200,
-    };
+    console.log(tickerData);
+    if (tickerData && tickerData.length > 0) {
+      return {
+        res: tickerData,
+        status: 200,
+      };
+    } else {
+      return {
+        message: "No Exchange Data Found",
+        status: 404,
+      };
+    }
   } catch (error) {
     console.log(error);
     return {

@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import ccxt, { exchanges } from "ccxt";
-
 import { IoIosArrowDown } from "react-icons/io";
 import { data } from "@/constants";
 // SERVER ACTIONS
@@ -16,8 +14,8 @@ const Exchanges = () => {
   const [showCryptoList, setShowCryptoList] = useState(false);
   const [selectedSymbolQuery, setSelectedSymbolQuery] = useState("XRP/USDT");
   const [selectedSymbolLabel, setSelectedSymbolLabel] = useState("XRP");
-  const [exchangeData, setExchangeData] = useState();
-  const [filteredExchangeData, setFilteredExchangeData] = useState();
+  const [exchangeData, setExchangeData] = useState([]);
+  const [filteredExchangeData, setFilteredExchangeData] = useState([]);
 
   const filterExchangeData = (data, symbol) => {
     const prev_data = [...data];
@@ -57,59 +55,34 @@ const Exchanges = () => {
     setFilteredExchangeData(filteredData);
   };
 
-  // ! Fetch Data function
-  const fetchExchangeData = async () => {
-    // setIsLoading(true);
-    console.log("loading start");
-    try {
-      // const exchange = new exchanges[data.exchanges_list[1]]({
-      //   proxyUrl: process.env.HTTP_PROXY2,
-      // });
-      const exchange = new exchanges[data.exchanges_list[3]]({
-        enableRateLimit: true,
-        proxyUrlhttpProxy: "http://127.0.0.1:1087",
-      });
-      // exchange.proxyUrl = data.https_proxies[2];
-      const response = await exchange.fetchTickers(data.exchange_symbols);
-      const res_data = Object.values(response);
-      setExchangeData(res_data);
-      console.log("🚀 ~ fetchExchangeData ~ data:", res_data);
-    } catch (error) {
-      console.error("Error fetching ticker data:", error);
-      // setError(error.message);
-    }
-    // setIsLoading(false);
-    console.log("loading end");
-  };
-
   // *FETCH DATA ON PAGE LOAD
-  // useEffect(() => {
-  //   // fetchExchangeData();
-  //   // // * FETCH DATA FUNCTION
-  //   // const fetchExchangeData = async () => {
-  //   //   setIsLoading(true);
-  //   //   try {
-  //   //     const response = await fetch(`/api/tickers`);
-  //   //     if (!response.ok) {
-  //   //       setShowNetworkError(true);
-  //   //       throw new Error("Network response was not ok");
-  //   //     }
-  //   //     const data = await response.json();
-  //   //     setExchangeData(data);
-  //   //     console.log("🚀 ~ fetchExchangeData ~ data:", data);
-  //   //   } catch (error) {
-  //   //     console.error("Error fetching ticker data:", error);
-  //   //     // setError(error.message);
-  //   //   }
-  //   //   setIsLoading(false);
-  //   // };
-  //   // fetchExchangeData();
-  // }, []);
-
   useEffect(() => {
+    // * FETCH DATA FUNCTION
+    const fetchExchangeData = () => {
+      setIsLoading(true);
+      // const exchanges_list = await getExchanges(selectedSymbolQuery)
+
+      getExchanges(selectedSymbolQuery).then((response) => {
+        console.log(response);
+        if (response.status) {
+          if (response.status === 200) {
+            setExchangeData(response.res);
+            setShowNetworkError(false);
+          } else {
+            setShowNetworkError(true);
+          }
+        } else {
+          setShowNetworkError(true);
+        }
+
+        setIsLoading(false);
+
+        // filterExchangeData(exchangeData, selectedSymbolQuery);
+      });
+    };
+
     fetchExchangeData();
-    // filterExchangeData(exchangeData, selectedSymbolQuery);
-  }, [selectedSymbolQuery]);
+  }, []);
 
   // *FETCH DATA ON SYMBOL CHANGE
   // useEffect(() => {
@@ -139,7 +112,7 @@ const Exchanges = () => {
         {/* Dropdowm List */}
         {showCryptoList && (
           <div className="absolute top-[120%] right-0 w-50 md:w-55 dark-gradient-2 rounded-lg border border-card shadow-xl shadow-card/10 overflow-hidden z-100">
-            <ul className="flex flex-col w-full divide-y divide-card/30 max-h-[15em] overflow-y-auto no-scrollbar">
+            <ul className="flex flex-col w-full divide-y divide-card/30 max-h-100 overflow-y-auto no-scrollbar">
               {data.symbols_list.map((symbol, i) => (
                 <li key={i} className="w-full">
                   <button
