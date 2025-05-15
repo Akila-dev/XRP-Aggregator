@@ -154,13 +154,6 @@ const ExchangesTable = ({ data }) => {
                   Number(datum.volume24h).toFixed(2)
                 )}
               </td>
-              {/* <td className="">
-                  {datum.change24h
-                    ? new Intl.NumberFormat("en-US", currencyFormat).format(
-                      Number(datum.change24h).toFixed(2)
-                    )
-                    : "-"}
-                </td> */}
               <td className="">
                 {new Intl.NumberFormat("en-US", currencyFormat).format(
                   Number(datum.high24h).toFixed(2)
