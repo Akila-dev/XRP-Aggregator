@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import ccxt, { exchanges } from "ccxt";
+import ccxt, { exchanges, NetworkError } from "ccxt";
 
 import { IoIosArrowDown } from "react-icons/io";
 import { BsArrowRepeat } from "react-icons/bs";
@@ -20,6 +20,8 @@ const Exchanges = () => {
   const [filteredExchangeData, setFilteredExchangeData] = useState([]);
 
   const filterExchangeData = (ex_data, symbol) => {
+    setExchangeData(ex_data);
+
     if (ex_data && ex_data.length > 0 && symbol) {
       const prev_data = [...my_exchange_data.data, ...ex_data];
       console.log("🚀 ~ filterExchangeData ~ ex_data:", ex_data);
@@ -69,7 +71,7 @@ const Exchanges = () => {
   // ! Fetch Data function
   const fetchExchangeData = async () => {
     setIsLoading(true);
-    console.log("loading tickers start");
+    // console.log("loading tickers start");
     // ! Fetch Exchange Data
     try {
       const exchangeList = data.exchanges_list.map(async (exchangeString) => {
@@ -98,14 +100,13 @@ const Exchanges = () => {
       });
 
       // ! Set Exchange Data to the respone data
-      setExchangeData(await Promise.all(exchangeList));
+      filterExchangeData(await Promise.all(exchangeList), selectedSymbolQuery);
     } catch (error) {
       // console.error("Error fetching ticker data:");
       // setError(error.message);
       setShowNetworkError(true);
     }
 
-    filterExchangeData(exchangeData, selectedSymbolQuery);
     setIsLoading(false);
     console.log("loading tickers end");
   };
@@ -203,7 +204,7 @@ const Exchanges = () => {
                   <ExchangesTable data={filteredExchangeData} />
                 ) : (
                   <div>
-                    <p className="p-4">Couldn't Find Any Data to display</p>
+                    <p className="p-4">Couldn't Find Any Data to display.</p>
                     <button
                       onClick={() => fetchExchangeData()}
                       className="p-4 bg-dark/50 text-gradient rounded-lg"
@@ -217,6 +218,19 @@ const Exchanges = () => {
           </div>
         )}
       </div>
+      {!isLoading &&
+        !showNetworkError &&
+        filteredExchangeData.length <= my_exchange_data.data.length && (
+          <p className="p-4">
+            Slow network, please check your network and{" "}
+            <button
+              onClick={() => fetchExchangeData()}
+              className="inline text-gradient"
+            >
+              Try Again
+            </button>
+          </p>
+        )}
     </div>
   );
 };
