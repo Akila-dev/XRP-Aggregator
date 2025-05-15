@@ -127,7 +127,10 @@ const Exchanges = () => {
   }, [exchangeData, selectedSymbolQuery]);
 
   return (
-    <div className="container border-y border-dark bg-lines space-y-5 lg:space-y-6">
+    <div
+      id="exchanges"
+      className="container border-y border-dark bg-lines space-y-5 lg:space-y-6"
+    >
       {/* DropDown Section */}
       <div className="relative w-fit">
         <div className="flex-v-center flex-wrap">
