@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ccxt, { exchanges } from "ccxt";
 
 import { IoIosArrowDown } from "react-icons/io";
+import { BsArrowRepeat } from "react-icons/bs";
 import { data } from "@/constants";
 
 import { ExchangesTable, Loading } from "@/components";
@@ -130,7 +131,7 @@ const Exchanges = () => {
       {/* DropDown Section */}
       <div className="relative w-fit">
         <div className="flex-v-center flex-wrap">
-          <span className="hide-md">Crypto:</span>
+          {/* <span className="hide-md">Crypto:</span> */}
           <span className="show-md">Cryptocurrency:</span>
           <button
             type="button"
@@ -143,6 +144,12 @@ const Exchanges = () => {
                 showCryptoList ? "rotate-180" : ""
               }`}
             />
+          </button>
+          <button
+            onClick={() => fetchExchangeData()}
+            className="bg-dark/50 text-neon p-[0.5em] size-[2.5em] flex-center border border-card shadow-xl shadow-card/10 rounded-full cursor-pointer"
+          >
+            <BsArrowRepeat className="text-neon scale-125" />
           </button>
         </div>
         {/* Dropdowm List */}
@@ -178,13 +185,29 @@ const Exchanges = () => {
         ) : (
           <div>
             {showNetworkError ? (
-              <p className="p-4">Network Error, Please Try Again</p>
+              <div>
+                <p className="p-4">Network Error, Please Try Again</p>
+                <button
+                  onClick={() => fetchExchangeData()}
+                  className="p-4 bg-dark/50 text-gradient rounded-lg"
+                >
+                  Try Again
+                </button>
+              </div>
             ) : (
               <div>
                 {filteredExchangeData && filteredExchangeData.length > 0 ? (
                   <ExchangesTable data={filteredExchangeData} />
                 ) : (
-                  <p className="p-4">Couldn't Find Any Data to display</p>
+                  <div>
+                    <p className="p-4">Couldn't Find Any Data to display</p>
+                    <button
+                      onClick={() => fetchExchangeData()}
+                      className="p-4 bg-dark/50 text-gradient rounded-lg"
+                    >
+                      Try Again
+                    </button>
+                  </div>
                 )}
               </div>
             )}
